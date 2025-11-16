@@ -14,7 +14,7 @@ import Slide2Image from "../assets/banners/ctbanner.jpg"; // your screenshot
 const SLIDES = [
   {
     id: 1,
-    type: "split", // left text + right image
+    type: "split",
     title: (
       <>
         Zero Upfront
@@ -29,7 +29,7 @@ const SLIDES = [
   },
   {
     id: 2,
-    type: "full", // image as background, text centered
+    type: "full",
     title: <>48 Hours to Your Next Hire.</>,
     description:
       "AI matches, human-verified professionals — delivered fast. No cost until they start.",
@@ -40,19 +40,18 @@ const SLIDES = [
 ];
 
 const Homepage = () => {
-  // ---------- Carousel ----------
   const [slideIdx, setSlideIdx] = useState(0);
   const controls = useAnimation();
 
-  // Auto‑play (7 seconds)
+  // Auto-slide every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setSlideIdx((i) => (i + 1) % SLIDES.length);
-    }, 7000);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
-  // ---------- Text animation ----------
+  // Container variant with stagger, used for BOTH slides
   const textContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -60,6 +59,8 @@ const Homepage = () => {
       transition: { staggerChildren: 0.2, delayChildren: 0.3 },
     },
   };
+
+  // Item variant, used for all text/button elements
   const textItemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -69,7 +70,7 @@ const Homepage = () => {
     },
   };
 
-  // ---------- Tilt image (only for slide 1) ----------
+  // Tilt effect (only for split slide)
   const imgRef = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -87,7 +88,6 @@ const Homepage = () => {
     y.set(0);
   };
 
-  // ---------- Navigation ----------
   const goToSlide = (idx) => {
     setSlideIdx(idx);
     controls.start("visible");
@@ -95,23 +95,44 @@ const Homepage = () => {
 
   const current = SLIDES[slideIdx];
 
-  // -----------------------------------------------------------------
-  //  Render based on slide type
-  // -----------------------------------------------------------------
+  // Navigation – only dots (arrows removed)
+  const renderNavigation = () => (
+    <>
+      {/* DOTS */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goToSlide(i)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              i === slideIdx ? "bg-[#ffc804] w-8" : "bg-white/60"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </>
+  );
+
+  // SLIDE 1: Split Layout
   if (current.type === "split") {
-    // ---------- SLIDE 1: original split layout ----------
     return (
       <div
-        className="relative min-h-[90vh] overflow-hidden pt-18 bg-cover bg-center"
+        className="relative h-[95vh] overflow-hidden pt-18 bg-cover bg-center"
         style={{ backgroundImage: `url(${HomeBackgroundImage})` }}
       >
-        {/* blobs */}
+        {/* Background blobs */}
         <div className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-gradient-to-br from-purple-200 to-orange-200 rounded-full opacity-30 blur-2xl z-0"></div>
         <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-purple-500 rounded-full opacity-70 z-0 animate-move-horizontal"></div>
         <div className="absolute bottom-1/4 right-1/2 w-3 h-3 bg-blue-400 rounded-full opacity-70 z-0 animate-move-horizontal"></div>
 
-        <div className="container relative mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
-          {/* LEFT TEXT */}
+        {/* --- MODIFIED LINE ---
+            Added h-full (to fill parent height)
+            Added justify-center (to center mobile grid)
+            Added md:justify-start (to reset justification for desktop grid)
+        */}
+        <div className="container relative h-full mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center justify-center md:justify-start z-10">
+          {/* LEFT: Text */}
           <motion.div
             key={slideIdx}
             variants={textContainerVariants}
@@ -143,7 +164,7 @@ const Homepage = () => {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT IMAGE (tilt) */}
+          {/* RIGHT: Tilt Image */}
           <motion.div
             ref={imgRef}
             className="relative hidden md:flex items-center justify-center"
@@ -155,7 +176,7 @@ const Homepage = () => {
               key={current.image}
               src={current.image}
               alt="Hero banner"
-              className="w-auto h-auto max-h-[75vh] rounded-lg shadow-2xl"
+              className="w-auto h-auto max-h-[75vh]"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -170,30 +191,28 @@ const Homepage = () => {
           </motion.div>
         </div>
 
-        {/* Dots & arrows (shared) */}
         {renderNavigation()}
       </div>
     );
   }
 
-  // ---------- SLIDE 2: full‑image background, centered text ----------
+  // SLIDE 2: Full Image Background + Centered Text
   return (
     <div
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-cover bg-center"
+      className="relative h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: `url(${current.image})` }}
     >
-      {/* Optional dark overlay for readability */}
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/40 z-0"></div>
 
       <div className="container relative mx-auto px-6 z-10 text-center">
         <motion.div
           key={slideIdx}
-          variants={textContainerVariants}
+          variants={textContainerVariants} // Uses the same stagger as Slide 1
           initial="hidden"
           animate="visible"
           className="max-w-4xl mx-auto"
         >
-          {/* Title */}
           <motion.h1
             className="home-text-h1 text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-white drop-shadow-lg"
             variants={textItemVariants}
@@ -201,7 +220,6 @@ const Homepage = () => {
             {current.title}
           </motion.h1>
 
-          {/* Description */}
           <motion.p
             className="mt-6 text-lg md:text-xl text-white/90 max-w-2xl mx-auto drop-shadow"
             variants={textItemVariants}
@@ -214,7 +232,6 @@ const Homepage = () => {
             )}
           </motion.p>
 
-          {/* CTA */}
           <motion.div
             className="mt-8 flex justify-center"
             variants={textItemVariants}
@@ -224,59 +241,11 @@ const Homepage = () => {
             </button>
           </motion.div>
         </motion.div>
-      </div>
+      </div>a
 
-      {/* Dots & arrows (shared) */}
       {renderNavigation()}
     </div>
   );
-
-  // -----------------------------------------------------------------
-  //  Shared navigation component (dots + arrows)
-  // -----------------------------------------------------------------
-  function renderNavigation() {
-    return (
-      <>
-        {/* DOTS */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-          {SLIDES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goToSlide(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                i === slideIdx ? "bg-[#ffc804] w-8" : "bg-white/60"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* LEFT ARROW */}
-        <button
-          className="absolute left-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-3 rounded-full z-20"
-          onClick={() =>
-            goToSlide((slideIdx - 1 + SLIDES.length) % SLIDES.length)
-          }
-          aria-label="Previous slide"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        {/* RIGHT ARROW */}
-        <button
-          className="absolute right-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-3 rounded-full z-20"
-          onClick={() => goToSlide((slideIdx + 1) % SLIDES.length)}
-          aria-label="Next slide"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </>
-    );
-  }
 };
 
 export default Homepage;
