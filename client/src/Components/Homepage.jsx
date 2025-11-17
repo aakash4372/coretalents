@@ -10,6 +10,7 @@ import {
 import Homebannerimage1 from "../assets/banners/home1.png";
 import HomeBackgroundImage from "../assets/banners/hero_bg_8.jpg";
 import Slide2Image from "../assets/banners/ctbanner.jpg"; // your screenshot
+import Slide3Image from "../assets/banners/officebanner.jpg"; // your screenshot
 
 const SLIDES = [
   {
@@ -30,12 +31,20 @@ const SLIDES = [
   {
     id: 2,
     type: "full",
+    title: <>Hire First Pay Later</>,
+    description:
+      "Get pre-verified, job-ready professionals delivered within 48 hours — pay only after successful joining.",
+  cta: "Start Hiring Now",
+      image: Slide2Image,
+  },
+  {
+    id: 3,
+    type: "full",
     title: <>48 Hours to Your Next Hire.</>,
     description:
-      "AI matches, human-verified professionals — delivered fast. No cost until they start.",
-    trust: "Trusted by 25+ Tamil Nadu & Pondicherry businesses.",
+      "AI matches, human-verified professionals — delivered fast. No cost until they start.Trusted by 25+ Tamil Nadu & Pondicherry businesses.",
     cta: "Start Hiring Now",
-    image: Slide2Image,
+    image: Slide3Image,
   },
 ];
 
@@ -118,7 +127,7 @@ const Homepage = () => {
   if (current.type === "split") {
     return (
       <div
-        className="relative h-[95vh] overflow-hidden pt-18 bg-cover bg-center"
+        className="relative h-[100vh] overflow-hidden pt-18 bg-cover bg-center"
         style={{ backgroundImage: `url(${HomeBackgroundImage})` }}
       >
         {/* Background blobs */}
@@ -167,7 +176,7 @@ const Homepage = () => {
           {/* RIGHT: Tilt Image */}
           <motion.div
             ref={imgRef}
-            className="relative hidden md:flex items-center justify-center"
+            className="relative hidden  md:flex items-center justify-center"
             style={{ perspective: 1000 }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -199,7 +208,7 @@ const Homepage = () => {
   // SLIDE 2: Full Image Background + Centered Text
   return (
     <div
-      className="relative h-[95vh] flex items-center justify-center overflow-hidden bg-cover bg-center"
+      className="relative h-[100vh] flex items-center justify-center overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: `url(${current.image})` }}
     >
       {/* Dark overlay */}
@@ -241,7 +250,7 @@ const Homepage = () => {
             </button>
           </motion.div>
         </motion.div>
-      </div>a
+      </div>
 
       {renderNavigation()}
     </div>
