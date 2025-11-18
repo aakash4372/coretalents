@@ -54,7 +54,7 @@ const Trustbrand = () => {
           className="text-4xl mt-10 font-bold text-center text-gray-800 mb-16"
           style={{ fontFamily: 'Poppins, sans-serif' }}
         >
-          Trusted By Leading Brands
+          Trusted by Leading Brands
         </h1>
 
         <div
@@ -71,7 +71,7 @@ const Trustbrand = () => {
                 <img
                   src={logo.url}
                   alt={index < logos.length ? logo.name : ''}
-                  className={`${logo.heightClass} w-auto mx-10 grayscale opacity-80 transition-all duration-300 hover:grayscale-0 hover:opacity-100`}
+                  className={`${logo.heightClass} w-auto mx-10  transition-all duration-300 hover:grayscale-0 hover:opacity-100`}
                   onError={(e) => {
                     e.target.src = `https://placehold.co/150x50/gray/white?text=${logo.name}`;
                     e.target.className = `${logo.heightClass} w-auto mx-10 grayscale opacity-60`;
@@ -82,7 +82,7 @@ const Trustbrand = () => {
           </div>
         </div>
 
-        <hr className="mt-14 border-t border-gray-200" />
+        <hr className="mt-14 border-t border-1 border-gray-400" />
       </div>
     </div>
   );
