@@ -4,6 +4,7 @@ import Homepage from './Components/Homepage'
 import Section from './Components/Trustbrand'
 import About from './Components/About'
 import ServicesSection from './Components/Servcies'
+import CompanyStatusSection from './Components/CompanyStatusSection'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Section/>
       <About/>
       <ServicesSection/>
+      <CompanyStatusSection/>
       
     </div>
   )
