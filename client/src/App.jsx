@@ -7,6 +7,8 @@ import ServicesSection from './Components/Servcies'
 import CompanyStatusSection from './Components/CompanyStatusSection'
 import MissionVision from './Components/Mission&vissison'
 import WhyChooseUs from './Components/Whycompany'
+import Profilesection from './Components/Profilesection'
+import TestimonialSlider from './Components/Testimonials'
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
       <MissionVision/>
       <CompanyStatusSection/>
       <WhyChooseUs/>
+      <Profilesection/>
+      <TestimonialSlider/>
       
     </div>
   )

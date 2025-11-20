@@ -3,6 +3,10 @@ import { Check } from 'lucide-react';
 // Make sure this path is 100% correct based on your folder structure
 import bgImage from '../assets/vector/choose_bg_1.png'; 
 
+
+import Whyimage1 from '../assets/other/whyimage1.png';
+import Whyimage2 from '../assets/other/whyimage2.png';
+
 const WhyChooseUs = () => {
   return (
     <section className="relative w-full overflow-hidden py-12 md:py-16 lg:py-24">
@@ -12,8 +16,7 @@ const WhyChooseUs = () => {
         <img 
           src={bgImage} 
           alt="Background pattern" 
-          // Opacity set to ensure text readability
-          className="w-full h-full object-cover" 
+          className="w-full h-full" 
         />
       </div>
 
@@ -73,8 +76,8 @@ const WhyChooseUs = () => {
             </div>
 
             <div>
-              <button className="bg-[#84cc16] hover:bg-[#65a30d] text-black font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full transition-colors duration-300 flex items-center gap-2 shadow-lg shadow-lime-200 text-sm md:text-base">
-                Start Hiring Now
+              <button className="bg-[#84cc16] hover:bg-[#65a30d] text-white font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full transition-colors duration-300 flex items-center gap-2 shadow-lg shadow-lime-200 text-sm md:text-base">
+                Explore Careers
               </button>
             </div>
           </div>
@@ -87,7 +90,7 @@ const WhyChooseUs = () => {
                 <div className="relative h-[220px] sm:h-[300px] md:h-[420px] w-full overflow-hidden rounded-[60px] md:rounded-[90px] group cursor-pointer shadow-lg">
                   
                   <img 
-                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                    src={Whyimage1} 
                     alt="Corporate collaboration" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
@@ -103,7 +106,7 @@ const WhyChooseUs = () => {
                 <div className="relative h-[220px] sm:h-[300px] md:h-[420px] w-full overflow-hidden rounded-[60px] md:rounded-[90px] group cursor-pointer shadow-lg">
                   
                   <img 
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                    src={Whyimage2} 
                     alt="Successful hiring team" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
