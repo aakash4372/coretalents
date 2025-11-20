@@ -1,31 +1,29 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-// Keep the default import style for 'react-countup'
 import CountUp from 'react-countup'; 
 import OfficeTeamVideo from '../assets/vector/video-img.jpg'; 
 
-// --- FIX: Safely resolve the CountUp component ---
-// This handles different ways bundlers (like Vite/Webpack) might export modules.
-// It tries to find the component under .CountUp, .default, or uses the import directly.
+// Fix for bundler compatibility
 const FinalCountUp = CountUp.CountUp || CountUp.default || CountUp; 
 
 // --- Custom CountUp Component ---
-const AnimatedCount = ({ end, duration = 1.5, start = 0, suffix, textClass, staticText }) => {
+const AnimatedCount = ({ end, duration = 7, start = 0, suffix, textClass, staticText, isInView }) => {
   return (
     <p className={`text-6xl font-bold mb-2 ${textClass}`}>
-      {/* Now using the resolved FinalCountUp component */}
-      <FinalCountUp 
-        end={end}
-        duration={duration}
-        start={start}
-        // Use the suffix prop for the small '+' sign to ensure smooth counting
-        suffix={suffix ? '' : ''} 
-        separator=""
-        useEasing={true}
-      />
-      {/* Custom suffix for the '+' sign styling */}
+      {isInView ? (
+        <FinalCountUp 
+          end={end}
+          duration={duration}
+          start={start}
+          suffix="" 
+          separator=""
+          useEasing={true}
+        />
+      ) : (
+        <span>{start}</span>
+      )}
+
       <span className="text-4xl align-top">{suffix}</span>
-      {/* Descriptive static text, e.g., "States & 6 Countries" */}
       {staticText && <span className="text-lg font-normal ml-2">{staticText}</span>}
     </p>
   );
@@ -55,7 +53,7 @@ const CompanyStatusSection = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 font-sans bg-white" ref={ref}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-16">
 
         {/* --- Left Column: Image/Video Area --- */}
         <motion.div 
@@ -71,48 +69,56 @@ const CompanyStatusSection = () => {
           />
         </motion.div>
 
-        {/* --- Right Column: Title & Status Numbers (Animated) --- */}
+        {/* --- Right Column: Title & Status Numbers --- */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {/* Status Tag */}
           <motion.span className="inline-block px-3 py-1 text-sm font-medium rounded-full text-purple-700 bg-purple-100 mb-4" variants={itemVariants}>
             Company Status
           </motion.span>
 
-          {/* Main Heading */}
           <motion.h2 className="text-4xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-10 leading-tight" variants={itemVariants}>
             Building Brands That Inspire A Better Tomorrow
           </motion.h2>
 
           {/* --- Status Numbers Grid --- */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+          <div className="grid grid-cols-2 gap-x-0 gap-y-0">
 
             {/* 1. Corporate Clients */}
-            <motion.div className="py-6 border-b border-gray-200" variants={itemVariants}>
-              <AnimatedCount end={25} suffix="+" textClass="text-purple-600" />
-              <p className="text-lg text-gray-600">Corporate Clients</p>
-            </motion.div>
+            {/* Changed to standard div so border doesn't move */}
+            <div className="py-6 pr-4 border-r border-b border-gray-400">
+               {/* Wrapped content in motion.div so only TEXT moves */}
+               <motion.div variants={itemVariants}>
+                  <AnimatedCount isInView={isInView} end={25} suffix="+" textClass="text-purple-600" />
+                  <p className="text-lg text-gray-600">Corporate Clients</p>
+               </motion.div>
+            </div>
 
             {/* 2. Candidates Placed */}
-            <motion.div className="py-6 border-b border-gray-200" variants={itemVariants}>
-              <AnimatedCount end={350} suffix="+" textClass="text-green-600" />
-              <p className="text-lg text-gray-600">Candidates Placed</p>
-            </motion.div>
+            <div className="py-6 pl-8 border-b border-gray-400">
+               <motion.div variants={itemVariants}>
+                  <AnimatedCount isInView={isInView} end={350} suffix="+" textClass="text-green-600" />
+                  <p className="text-lg text-gray-600">Candidates Placed</p>
+               </motion.div>
+            </div>
 
             {/* 3. Hour Hiring Cycle */}
-            <motion.div className="py-6" variants={itemVariants}>
-              <AnimatedCount end={48} suffix="+" textClass="text-yellow-600" />
-              <p className="text-lg text-gray-600">Hour Hiring Cycle</p>
-            </motion.div>
+            <div className="py-6 pr-4 border-r border-gray-400">
+               <motion.div variants={itemVariants}>
+                  <AnimatedCount isInView={isInView} end={48} suffix="+" textClass="text-yellow-600" />
+                  <p className="text-lg text-gray-600">Hour Hiring Cycle</p>
+               </motion.div>
+            </div>
 
             {/* 4. States & Countries */}
-            <motion.div className="py-6" variants={itemVariants}>
-              <AnimatedCount end={18} suffix="+" textClass="text-blue-600" />
-              <p className="text-lg text-gray-600">States & 6 Countries</p>
-            </motion.div>
+            <div className="py-6 pl-8">
+               <motion.div variants={itemVariants}>
+                  <AnimatedCount isInView={isInView} end={18} suffix="+" textClass="text-blue-600" />
+                  <p className="text-lg text-gray-600">States & 6 Countries</p>
+               </motion.div>
+            </div>
 
           </div>
         </motion.div>

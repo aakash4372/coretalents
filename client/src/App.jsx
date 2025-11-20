@@ -5,6 +5,8 @@ import Section from './Components/Trustbrand'
 import About from './Components/About'
 import ServicesSection from './Components/Servcies'
 import CompanyStatusSection from './Components/CompanyStatusSection'
+import MissionVision from './Components/Mission&vissison'
+import WhyChooseUs from './Components/Whycompany'
 
 const App = () => {
   return (
@@ -14,7 +16,9 @@ const App = () => {
       <Section/>
       <About/>
       <ServicesSection/>
+      <MissionVision/>
       <CompanyStatusSection/>
+      <WhyChooseUs/>
       
     </div>
   )

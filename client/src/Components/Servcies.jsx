@@ -44,12 +44,12 @@ const ServicesSection = () => {
   return (
     <div className="min-h-screen bg-black font-sans selection:bg-purple-500 selection:text-white overflow-hidden relative">
       {/* Shape Section */}
-      <div className="bg-white w-full lg:w-[75%] rounded-br-[80px] lg:rounded-br-[200px] pt-16 pb-24 px-6 md:px-16 relative z-10">
+      <div className="bg-[#f8f8f8] w-full lg:w-[75%] rounded-br-[80px] lg:rounded-br-[400px] pt-16 pb-24 px-6 md:px-16 relative z-10">
         <div className="max-w-3xl">
           <span className="inline-block bg-purple-100 text-purple-700 font-semibold px-4 py-2 rounded-full text-sm mb-6">
             Our Best Service For You
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-black leading-tight tracking-tight">
             Provide The Best Service With Out Of The Box Ideas
             <span className="text-purple-600">!</span>
           </h1>
@@ -60,7 +60,7 @@ const ServicesSection = () => {
       <div className="hidden lg:block absolute top-12 right-26 z-20">
         <button
           className="
-    group w-24 h-24 md:w-36 md:h-36 rounded-full border border-gray-600 text-white 
+    group w-24 h-24 md:w-36 md:h-36 rounded-full border border-gray-400 text-white 
     flex items-center justify-center text-center text-sm md:text-base 
     cursor-pointer overflow-hidden relative
     transition-all duration-300
