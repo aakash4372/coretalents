@@ -10,6 +10,8 @@ import WhyChooseUs from './Components/Whycompany'
 import Profilesection from './Components/Profilesection'
 import TestimonialSlider from './Components/Testimonials'
 import Gallerysection from './Components/Gallery'
+import Newspapercard from './Components/Newspapercard'
+import Footer from './Components/Footer'
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
       <Profilesection/>
       <TestimonialSlider/>
       <Gallerysection/>
+      <Newspapercard/>
+      <Footer/>
       
     </div>
   )
