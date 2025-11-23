@@ -1,5 +1,5 @@
 import React from 'react';
-import Calltoactionimage from '../assets/vector/cta-img4.png'
+import Calltoactionimage from '@/assets/vector/cta-img4.png'
 const Newspapercard = () => {
   return (
     <div className="mb-22 flex items-center justify-center p-4">

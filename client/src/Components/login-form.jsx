@@ -24,7 +24,7 @@ export function LoginForm({ className, ...props }) {
     setLoading(true); // Start loading
     try {
       await login(email, password);
-      navigate("/admin"); // Redirect after success
+
     } catch (err) {
       console.log(err);
       // Error toast already handled in AuthContext

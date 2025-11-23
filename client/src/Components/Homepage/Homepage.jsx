@@ -7,10 +7,10 @@ import {
   useAnimation,
 } from "framer-motion";
 
-import Homebannerimage1 from "../assets/banners/home1.png";
-import HomeBackgroundImage from "../assets/banners/hero_bg_8.jpg";
-import Slide2Image from "../assets/banners/ctbanner.jpg"; // your screenshot
-import Slide3Image from "../assets/banners/officebanner.jpg"; // your screenshot
+import Homebannerimage1 from "@/assets/banners/home1.png";
+import HomeBackgroundImage from "@/assets/banners/hero_bg_8.jpg";
+import Slide2Image from "@/assets/banners/ctbanner.jpg"; // your screenshot
+import Slide3Image from "@/assets/banners/officebanner.jpg"; // your screenshot
 
 const SLIDES = [
   {

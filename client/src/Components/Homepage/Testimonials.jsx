@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import BackgroundImage from '../assets/other/map.png';
+import BackgroundImage from '@/assets/other/map.png';
 
 const TESTIMONIALS = [
   {

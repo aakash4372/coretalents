@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion"; // 1. Import Framer Motion
-import Ceo from "../assets/Profiles/ceo.png";
+import Ceo from "@/assets/Profiles/ceo.png";
 
 const About = () => {
   return (
@@ -41,7 +41,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            About Our Company
+            About Us
           </motion.span>
 
           {/* Title */}

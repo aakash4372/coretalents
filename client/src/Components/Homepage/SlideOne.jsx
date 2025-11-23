@@ -2,8 +2,8 @@
 
 import React, { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import Homebannerimage1 from "../assets/banners/home1.png";
-import HomeBackgroundImage from "../assets/banners/hero_bg_8.jpg";
+import Homebannerimage1 from "@/assets/banners/home1.png";
+import HomeBackgroundImage from "@/assets/banners/hero_bg_8.jpg";
 
 const SlideOne = () => {
   // --- Text Animation Variants ---

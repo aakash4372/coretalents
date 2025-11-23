@@ -1,11 +1,11 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 // Make sure this path is 100% correct based on your folder structure
-import bgImage from '../assets/vector/choose_bg_1.png'; 
+import bgImage from '@/assets/vector/choose_bg_1.png'; 
 
 
-import Whyimage1 from '../assets/other/whyimage1.png';
-import Whyimage2 from '../assets/other/whyimage2.png';
+import Whyimage1 from '@/assets/other/whyimage1.png';
+import Whyimage2 from '@/assets/other/whyimage2.png';
 
 const WhyChooseUs = () => {
   return (

@@ -16,7 +16,6 @@ const Adminroutes = () => {
         }
       >
         {/* ✅ Default route: redirect /admin to /admin/menu */}
-        <Route index element={<Navigate to="/admin" replace />} />
 
         <Route path="gallery" element={<Gallery />} />
       </Route>

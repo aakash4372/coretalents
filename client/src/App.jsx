@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
-import Navbar from "./Components/Navbar";
+import Navbar from "./Components/layout/Navbar";
 import Mainroutes from "./Routes/Routes";
 import { ToastContainer } from "react-toastify";
-import Footer from "./Components/Footer";
+import Footer from "./Components/layout/Footer";
 import { AuthProvider } from "./Context/Authcontext";
 
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-import PermenentStaffingImage from "../assets/Services/permanent-BR1WH0YX.jpg";
-import ContractStaffingImage from "../assets/Services/handshale-C0bGMN43.jpg";
-import HROutsourcingImage from "../assets/Services/hr-uCbeigW9.jpg";
-import CampusHiringImage from "../assets/Services/hiring-D04oipYD.png";
+import PermenentStaffingImage from "@/assets/Services/permanent-BR1WH0YX.jpg";
+import ContractStaffingImage from "@/assets/Services/handshale-C0bGMN43.jpg";
+import HROutsourcingImage from "@/assets/Services/hr-uCbeigW9.jpg";
+import CampusHiringImage from "@/assets/Services/hiring-D04oipYD.png";
 
 const ServicesSection = () => {
   // Service Data
@@ -58,30 +59,32 @@ const ServicesSection = () => {
 
       {/* Button */}
       <div className="hidden lg:block absolute top-12 right-26 z-20">
-        <button
-          className="
-    group w-24 h-24 md:w-36 md:h-36 rounded-full border border-gray-400 text-white 
-    flex items-center justify-center text-center text-sm md:text-base 
-    cursor-pointer overflow-hidden relative
-    transition-all duration-300
-    hover:border-purple-600
-  "
-        >
-          {/* Bottom → Top Purple Fill Animation */}
-          <div
+        <Link to="/services">
+          <button
             className="
-      absolute bottom-0 left-0 w-full h-0 
-      bg-purple-600 
-      transition-all duration-500 ease-out 
-      group-hover:h-full
-    "
-          ></div>
+        group w-24 h-24 md:w-36 md:h-36 rounded-full border border-gray-400 text-white 
+        flex items-center justify-center text-center text-sm md:text-base 
+        cursor-pointer overflow-hidden relative
+        transition-all duration-300
+        hover:border-purple-600
+        "
+          >
+            {/* Bottom → Top Purple Fill Animation */}
+            <div
+              className="
+            absolute bottom-0 left-0 w-full h-0 
+            bg-purple-600 
+            transition-all duration-500 ease-out 
+            group-hover:h-full
+        "
+            ></div>
 
-          {/* Text */}
-          <span className="relative z-10 group-hover:scale-125 transition-transform leading-tight">
-            View <br /> All Services
-          </span>
-        </button>
+            {/* Text */}
+            <span className="relative z-10 group-hover:scale-125 transition-transform leading-tight">
+              View <br /> All Services
+            </span>
+          </button>
+        </Link>
       </div>
 
       {/* Main Content */}
@@ -89,10 +92,11 @@ const ServicesSection = () => {
         {/* Left Column – Service List */}
         <div className="space-y-6">
           {services.map((service) => (
-            <div
+            <Link
+              to="/services"
               key={service.id}
-              onMouseEnter={() => setActiveService(service)} // 🔥 Hover updates active card
-              className="group border hover:bg-[#3a39393d] border-gray-800 rounded-3xl p-6 md:p-8 hover:border-gray-600 transition-colors cursor-pointer"
+              onMouseEnter={() => setActiveService(service)}
+              className="block group border hover:bg-[#3a39393d] border-gray-800 rounded-3xl p-6 md:p-8 hover:border-gray-600 transition-colors cursor-pointer"
             >
               <div className="group transition-all duration-300">
                 <div className="flex justify-between items-start mb-4">
@@ -146,36 +150,40 @@ const ServicesSection = () => {
               <p className="text-gray-400 text-sm md:text-base leading-relaxed pl-14">
                 {service.description}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
 
         {/* Right Column – Image Card */}
         <div className="relative mt-10 lg:mt-0 flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-md rotate-6 hover:rotate-0 transition-transform duration-500 ease-out">
-            <div className="bg-gray-200 rounded-[2rem] overflow-hidden shadow-2xl relative">
+          {/* 1. Removed 'rotate-6' */}
+          {/* 2. Added 'group' to handle hover state for child elements */}
+          <div className="group relative w-full max-w-md transition-all duration-500 ease-out">
+            
+            {/* 3. Rounded Logic: 'rounded-[40px]' by default, 'group-hover:rounded-none' on hover */}
+            <div className="bg-gray-200 rounded-[40px]  overflow-hidden shadow-2xl relative transition-all duration-500 ease-out">
+              
               {/* Service Image */}
               <img
                 key={activeService.image}
                 src={activeService.image}
                 alt="Service preview"
-                className="w-full h-[400px] object-cover animate-in fade-in duration-500"
+                // Added a slight scale effect on hover for polish
+                className="w-full h-[400px] object-cover animate-in fade-in duration-500 group-hover:scale-105 transition-transform duration-700"
               />
 
               {/* Bottom Info Card */}
-              <div className="absolute bottom-0 right-0 p-6 bg-white/90 backdrop-blur-sm w-full rounded-t-[2rem]">
+              <div className="absolute bottom-0 right-0 p-6 bg-white/90 backdrop-blur-sm w-full">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="h-8 w-8 rounded-full bg-yellow-400" />
                   <div className="h-8 w-8 rounded-full bg-red-400 -ml-4" />
                   <div className="h-8 w-8 rounded-full bg-blue-400 -ml-4" />
                 </div>
 
-                {/* 🔥 Dynamic Service Title */}
                 <h3 className="text-lg font-bold text-gray-900">
                   {activeService.title}
                 </h3>
 
-                {/* 🔥 Dynamic Service Description */}
                 <p className="text-sm text-gray-600 mt-1">
                   {activeService.description}
                 </p>

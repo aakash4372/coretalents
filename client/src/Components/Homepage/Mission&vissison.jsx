@@ -3,7 +3,7 @@ import { Target, Eye } from 'lucide-react';
 
 // --- 1. IMPORT YOUR IMAGE HERE ---
 // Replace './assets/background.jpg' with the actual path to your image file
-import missionBg from '../assets/vector/blog_bg_1.jpg'; 
+import missionBg from '@/assets/vector/blog_bg_1.jpg'; 
 
 const MissionVision = () => {
   return (

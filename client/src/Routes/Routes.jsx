@@ -1,14 +1,32 @@
+// Routes.jsx
 import { Routes, Route } from "react-router-dom";
 import Homeroutes from "./Homeroutes";
 import Adminroutes from "./Adminroutes";
 import PrivateRoute from "@/Context/PrivateRoute";
+import PublicRoute from "@/Context/PublicRoute"; // Import this
 import Login from "@/auth/Login";
+import Aboutroutes from "./Aboutroutes";
+import Servicesroute from "./Servicesroute";
+import Contactroutes from "./Contactroutes";
 
 const Mainroutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Homeroutes />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/about" element={<Aboutroutes />} />
+      <Route path="/services" element={<Servicesroute />} />
+      <Route path="/contact" element={<Contactroutes />} />
+
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
+
+      {/* All other routes under /* require admin */}
       <Route
         path="/*"
         element={
@@ -18,7 +36,6 @@ const Mainroutes = () => {
         }
       />
     </Routes>
-    
   );
 };
 

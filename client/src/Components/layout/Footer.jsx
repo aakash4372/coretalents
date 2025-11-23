@@ -1,6 +1,6 @@
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Phone, Send } from 'lucide-react';
-import Footeriamge from "../assets/vector/footer.png"
+import Footeriamge from "@/assets/vector/footer.png"
 
 const Footer = () => {
   // Data for the columns to keep the JSX clean

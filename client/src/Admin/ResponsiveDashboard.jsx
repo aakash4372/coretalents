@@ -1,5 +1,6 @@
+// src/Admin/ResponsiveDashboard.jsx
 import React, { useState, useEffect } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom'; 
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { 
   Menu, 
   Bell, 
@@ -7,11 +8,14 @@ import {
   User, 
   LogOut 
 } from 'lucide-react';
-import { BsFillHousesFill } from "react-icons/bs"; // Importing the icon used for Overview
+import { BsFillHousesFill } from "react-icons/bs";
 
-// --- Import Your Separate Files ---
-import Breadcrumbs from './Breadcrumbs'; 
-import { sidebarLinks } from './sidebarLinks'; 
+// --- Your Separate Files ---
+import Breadcrumbs from './Breadcrumbs';
+import { sidebarLinks } from './sidebarLinks';
+
+// --- Auth Context ---
+import { useAuth } from '@/Context/Authcontext'; // Adjust path if needed
 
 // --- Theme Configuration ---
 const THEME = {
@@ -32,8 +36,22 @@ const THEME = {
 
 // --- Sidebar Component ---
 const Sidebar = ({ isOpen, setIsOpen }) => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+    setIsOpen(false); // Close sidebar on mobile
+  };
+
+  const getInitials = (name) => {
+    if (!name) return "A";
+    return name.trim().split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  };
+
   return (
-    <>
+ <>
       <div 
         className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-20 lg:hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setIsOpen(false)}
@@ -75,17 +93,32 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           </nav>
 
           {/* Profile */}
-          <div className={`p-4 border-t border-gray-200`}>
-             <div className={`flex items-center gap-3 p-3 rounded-xl border bg-gray-100 border-gray-200`}>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-white font-bold text-sm">JD</div>
-                <div className="flex-1 overflow-hidden">
-                   <p className={`text-sm font-bold truncate ${THEME.text}`}>John Doe</p>
-                   <p className={`text-xs truncate ${THEME.textSecondary}`}>admin@food.com</p>
-                </div>
-                <button className={`${THEME.textMuted} hover:text-red-500 transition-colors`}>
-                   <LogOut size={18} />
-                </button>
-             </div>
+          <div className="p-4 border-t border-gray-200">
+            <div className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors">
+              {/* Avatar */}
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-sm shadow-md">
+                {getInitials(user?.name)}
+              </div>
+
+              {/* User Info */}
+              <div className="flex-1 min-w-0">
+                <p className={`text-sm font-bold truncate ${THEME.text}`}>
+                  {user?.name || "Admin User"}
+                </p>
+                <p className={`text-xs truncate ${THEME.textSecondary}`}>
+                  {user?.email || "admin@example.com"}
+                </p>
+              </div>
+
+              {/* Logout Button */}
+              <button
+                onClick={handleLogout}
+                className="p-2 rounded-lg text-gray-500 hover:text-red-600 hover:bg-red-50 transition-all duration-200"
+                title="Logout"
+              >
+                <LogOut size={18} />
+              </button>
+            </div>
           </div>
         </div>
       </aside>

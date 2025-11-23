@@ -1,13 +1,13 @@
 import React from 'react';
 
 // --- Image Imports ---
-import Brand1 from '../assets/Brands/brand1.png';
-import Brand2 from '../assets/Brands/brand2.png';
-import Brand3 from '../assets/Brands/brand3.png';
-import Brand4 from '../assets/Brands/brand4.png';
-import Brand5 from '../assets/Brands/brand5.png';
-import Brand6 from '../assets/Brands/brand6.png';
-import Brand7 from '../assets/Brands/brand7.png';
+import Brand1 from '@/assets/Brands/brand1.png';
+import Brand2 from '@/assets/Brands/brand2.png';
+import Brand3 from '@/assets/Brands/brand3.png';
+import Brand4 from '@/assets/Brands/brand4.png';
+import Brand5 from '@/assets/Brands/brand5.png';
+import Brand6 from '@/assets/Brands/brand6.png';
+import Brand7 from '@/assets/Brands/brand7.png';
 
 const ScrollAnimationStyles = () => {
   return (

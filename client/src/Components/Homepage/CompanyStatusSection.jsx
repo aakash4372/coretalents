@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import CountUp from 'react-countup'; 
-import OfficeTeamVideo from '../assets/vector/video-img.jpg'; 
+import OfficeTeamVideo from '@/assets/vector/video-img.jpg'; 
 
 // Fix for bundler compatibility
 const FinalCountUp = CountUp.CountUp || CountUp.default || CountUp; 
