@@ -1,37 +1,40 @@
-import React from 'react'
-import Navbar from './Components/Navbar'
-import Homepage from './Components/Homepage'
-import Section from './Components/Trustbrand'
-import About from './Components/About'
-import ServicesSection from './Components/Servcies'
-import CompanyStatusSection from './Components/CompanyStatusSection'
-import MissionVision from './Components/Mission&vissison'
-import WhyChooseUs from './Components/Whycompany'
-import Profilesection from './Components/Profilesection'
-import TestimonialSlider from './Components/Testimonials'
-import Gallerysection from './Components/Gallery'
-import Newspapercard from './Components/Newspapercard'
-import Footer from './Components/Footer'
+import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import Mainroutes from "./Routes/Routes";
+import { ToastContainer } from "react-toastify";
+import Footer from "./Components/Footer";
+import { AuthProvider } from "./Context/Authcontext";
 
-const App = () => {
+
+function AppContent() {
+  const location = useLocation();
+
+  // Hide Navbar/Footer on admin routes, login, and 404
+  const hideLayout =
+    location.pathname.startsWith("/admin") ||
+    location.pathname === "/login"
+
   return (
-    <div>
-      <Navbar/>
-      <Homepage/>
-      <Section/>
-      <About/>
-      <ServicesSection/>
-      <MissionVision/>
-      <CompanyStatusSection/>
-      <WhyChooseUs/>
-      <Profilesection/>
-      <TestimonialSlider/>
-      <Gallerysection/>
-      <Newspapercard/>
-      <Footer/>
-      
-    </div>
-  )
+    <>
+      {!hideLayout && <Navbar />}
+      <Mainroutes />
+      {!hideLayout && <Footer />}
+      <ToastContainer />
+    </>
+  );
 }
 
-export default App
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        {/* <Scrolltotop/> */}
+        <AppContent />
+        {/* <Whatsappfloating/> */}
+      </Router>
+    </AuthProvider>
+  );
+}
+
+export default App;
