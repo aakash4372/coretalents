@@ -113,7 +113,7 @@ const cardVariants = {
 
 const ExpertiseSection = () => {
   return (
-    <section className="relative py-24 bg-slate-50 overflow-hidden">
+    <section className="relative py-24 bg-slate-50 overflow-hidden" id="industries">
       
       {/* --- Vector Background Elements --- */}
       <div className="absolute inset-0 w-full h-full pointer-events-none">

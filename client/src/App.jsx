@@ -4,6 +4,7 @@ import Mainroutes from "./Routes/Routes";
 import { ToastContainer } from "react-toastify";
 import Footer from "./Components/layout/Footer";
 import { AuthProvider } from "./Context/Authcontext";
+import { Scrolltotop } from "./scrolltop/Scrolltotop";
 
 
 function AppContent() {
@@ -29,7 +30,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        {/* <Scrolltotop/> */}
+        <Scrolltotop/>
         <AppContent />
         {/* <Whatsappfloating/> */}
       </Router>

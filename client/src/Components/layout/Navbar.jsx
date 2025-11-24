@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, NavLink } from 'react-router-dom'; // Import from react-router-dom
+import { Link, NavLink, useLocation } from 'react-router-dom'; // ← Added useLocation
 import Logo from '@/assets/logo/logo.png';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 
@@ -31,7 +31,7 @@ const MobileNavItem = ({ title, to, dropdownLinks = [], onClick }) => {
       e.preventDefault();
       setIsOpen(!isOpen);
     } else {
-      onClick(); // Close offcanvas on simple link click
+      onClick();
     }
   };
 
@@ -51,7 +51,7 @@ const MobileNavItem = ({ title, to, dropdownLinks = [], onClick }) => {
           {dropdownLinks.map((link) => (
             <Link
               key={link.label}
-              to={link.to}
+              to={link.to}                 // ← Now includes #hash
               onClick={onClick}
               className="block px-6 py-2 text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600"
             >
@@ -68,8 +68,9 @@ const MobileNavItem = ({ title, to, dropdownLinks = [], onClick }) => {
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
+  const location = useLocation(); // ← Added
 
-  // Scroll hide/show logic
+  // Scroll hide/show logic (unchanged)
   useEffect(() => {
     const HIDE_THRESHOLD = 600;
 
@@ -89,9 +90,21 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // ← NEW: Smooth scroll to hash when route has #id
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location]);
+
   const closeOffcanvas = () => setIsOffcanvasOpen(false);
 
-  // Navigation data - now using "to" instead of "href"
+  // ← ONLY THIS PART CHANGED: dropdownLinks now have #hash
   const navItems = [
     { title: 'Home', to: '/' },
     { title: 'About', to: '/about' },
@@ -99,17 +112,18 @@ const Navbar = () => {
       title: 'Services',
       to: '/services',
       dropdownLinks: [
-        { to: '/services', label: 'AI Advantage' },
-        { to: '/services', label: 'Industries We Serve' },
+        { to: '/services#ai-advantage', label: 'AI Advantage' },
+        { to: '/services#industries',   label: 'Industries We Serve' },
+        // Add more if you want
       ],
     },
-    { title: 'Blog', to: '/blog' },
+    // { title: 'Blog', to: '/blog' },
     { title: 'Contact', to: '/contact' },
   ];
 
   return (
     <>
-      {/* Navbar */}
+      {/* Navbar - exactly your original */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-500 ease-in-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
@@ -144,7 +158,7 @@ const Navbar = () => {
                     {item.dropdownLinks.map((link) => (
                       <Link
                         key={link.label}
-                        to={link.to}
+                        to={link.to}   // ← Now includes #hash
                         className="block px-5 py-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"
                       >
                         {link.label}
@@ -174,11 +188,10 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Offcanvas */}
+      {/* Mobile Offcanvas - exactly your original */}
       <AnimatePresence>
         {isOffcanvasOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -187,7 +200,6 @@ const Navbar = () => {
               className="fixed inset-0 bg-black/60 z-50 md:hidden"
             />
 
-            {/* Panel */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}

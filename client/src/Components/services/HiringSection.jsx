@@ -36,7 +36,7 @@ const ModernHiringSection = () => {
   };
 
   return (
-    <section className="relative w-full py-20 lg:py-28 overflow-hidden">
+    <section className="relative w-full py-20 lg:py-28 overflow-hidden" id="ai-advantage">
       
       {/* --- BACKGROUND IMAGE VIA IMPORT METHOD --- */}
       <div 
